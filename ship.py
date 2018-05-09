@@ -1,4 +1,5 @@
 import pygame
+import random as r
 from pygame.sprite import Sprite
 
 class Ship(Sprite):
@@ -43,3 +44,4 @@ class Ship(Sprite):
     def blitme(self):
         """Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect)
+

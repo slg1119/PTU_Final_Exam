@@ -65,7 +65,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship,
         bullets.empty()
         
         # Create a new fleet and center the ship.
-        create_fleet(ai_settings, screen, ship, aliens)
+        create_fleet(ai_settings, screen, ship, aliens, stats)
         ship.center_ship()
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -109,13 +109,13 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
             
     check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         aliens, bullets)
-        
+
 def check_high_score(stats, sb):
     """Check to see if there's a new high score."""
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sb.prep_high_score()
-            
+
 def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         aliens, bullets):
     """Respond to bullet-alien collisions."""
@@ -137,7 +137,8 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         stats.level += 1
         sb.prep_level()
         
-        create_fleet(ai_settings, screen, ship, aliens)
+        create_fleet(ai_settings, screen, ship, aliens, stats)
+        ai_settings.change_bgcolor()
     
 def check_fleet_edges(ai_settings, aliens):
     """Respond appropriately if any aliens have reached an edge."""
@@ -154,10 +155,8 @@ def change_fleet_direction(ai_settings, aliens):
     
 def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
-    if stats.ships_left > 0:
-        # Decrement ships_left.
-        stats.ships_left -= 1
-        
+    stats.ships_left -= 1
+    if stats.ships_left == 1:
         # Update scoreboard.
         sb.prep_ships()
         
@@ -170,7 +169,7 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     bullets.empty()
     
     # Create a new fleet, and center the ship.
-    create_fleet(ai_settings, screen, ship, aliens)
+    create_fleet(ai_settings, screen, ship, aliens, stats)
     ship.center_ship()
     
     # Pause.
@@ -223,16 +222,20 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
     aliens.add(alien)
 
-def create_fleet(ai_settings, screen, ship, aliens):
+def create_fleet(ai_settings, screen, ship, aliens, stats):
     """Create a full fleet of aliens."""
     # Create an alien, and find number of aliens in a row.
     alien = Alien(ai_settings, screen)
     number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
     number_rows = get_number_rows(ai_settings, ship.rect.height,
         alien.rect.height)
-    
-    # Create the fleet of aliens.
-    for row_number in range(number_rows):
-        for alien_number in range(number_aliens_x):
-            create_alien(ai_settings, screen, aliens, alien_number,
-                row_number)
+    if (stats.level < 4):
+        for row_number in range(stats.level) :
+                for alien_number in range(number_aliens_x):
+                    create_alien(ai_settings, screen, aliens, alien_number,
+                        row_number)
+    else:
+        for row_number in range(number_rows):
+                for alien_number in range(number_aliens_x):
+                    create_alien(ai_settings, screen, aliens, alien_number,
+                        row_number)

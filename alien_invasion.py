@@ -24,7 +24,7 @@ def run_game():
     sb = Scoreboard(ai_settings, screen, stats)
     
     # Set the background color.
-    bg_color = (230, 230, 230)
+    bg_color = ai_settings.bg_color
     
     # Make a ship, a group of bullets, and a group of aliens.
     ship = Ship(ai_settings, screen)
@@ -32,7 +32,7 @@ def run_game():
     aliens = Group()
     
     # Create the fleet of aliens.
-    gf.create_fleet(ai_settings, screen, ship, aliens)
+    gf.create_fleet(ai_settings, screen, ship, aliens, stats)
 
     # Start the main loop for the game.
     while True:
@@ -48,5 +48,6 @@ def run_game():
         
         gf.update_screen(ai_settings, screen, stats, sb, ship, aliens,
             bullets, play_button)
+
 
 run_game()
