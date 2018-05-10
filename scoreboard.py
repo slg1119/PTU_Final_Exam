@@ -41,7 +41,7 @@ class Scoreboard():
         """Turn the high score into a rendered image."""
         high_score = int(round(self.stats.high_score, -1))
         high_score_str = "{:,}".format(high_score)
-        self.high_score_image = self.font.render("최고점수 : " + high_score_str + u"점", True,
+        self.high_score_image = self.font.render("최고점수 : " + high_score_str + "점", True,
             self.text_color, self.ai_settings.bg_color)
                 
         # Center the high score at the top of the screen.
