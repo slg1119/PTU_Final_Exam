@@ -11,7 +11,9 @@ class Ship(Sprite):
         self.ai_settings = ai_settings
 
         # Load the ship image, and get its rect.
-        self.image = pygame.image.load('images/ship.bmp')
+        self.image = pygame.image.load('images/ship.png')
+        self.image = pygame.transform.scale(self.image, (60, 60))
+
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
