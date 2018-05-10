@@ -121,7 +121,8 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
     """Respond to bullet-alien collisions."""
     # Remove any bullets and aliens that have collided.
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-    
+    sb.prep_score()
+
     if collisions:
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
@@ -139,6 +140,8 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         
         create_fleet(ai_settings, screen, ship, aliens, stats)
         ai_settings.change_bgcolor()
+        sb.prep_level()
+        sb.prep_high_score()
     
 def check_fleet_edges(ai_settings, aliens):
     """Respond appropriately if any aliens have reached an edge."""
