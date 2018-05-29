@@ -11,7 +11,7 @@ class Settings():
         self.bg_color = (255, 255, 255)
         
         # Ship settings.
-        self.ship_limit = 1
+        self.ship_limit = 2
             
         # Bullet settings.
         self.bullet_width = 3
