@@ -143,7 +143,6 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         sb.prep_level()
         
         create_fleet(ai_settings, screen, ship, aliens, stats)
-        ai_settings.change_bgcolor()
         sb.prep_level()
         sb.prep_high_score()
     

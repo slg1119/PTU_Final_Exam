@@ -8,7 +8,7 @@ class Settings():
         # Screen settings.
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (255, 255, 255)
+        self.bg_color = (0, 0, 0)
         
         # Ship settings.
         self.ship_limit = 2
@@ -16,7 +16,7 @@ class Settings():
         # Bullet settings.
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_color = (60, 60, 60)
+        self.bullet_color = (255, 255, 255)
         self.bullets_allowed = 3
         
         # Alien settings.
@@ -41,7 +41,7 @@ class Settings():
         # fleet_direction of 1 represents right, -1 represents left.
         self.fleet_direction = 1
         
-    def increase_speed(self):
+    def increase_speed(self, stats):
         """Increase speed settings and alien point values."""
         self.ship_speed_factor *= self.speedup_scale
         self.bullet_speed_factor *= self.speedup_scale
@@ -49,9 +49,3 @@ class Settings():
         
         self.alien_points = int(self.alien_points * self.score_scale)
 
-    def change_bgcolor(self):
-        red = r.randint(0,255)
-        green = r.randint(0,255)
-        blue = r.randint(0,255)
-        self.bg_color = (red, green, blue)
-        self.bullet_color = ((255 - red), (255 - green), (255 - blue))
