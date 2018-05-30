@@ -69,12 +69,12 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship,
         ship.center_ship()
 
 def fire_bullet(ai_settings, screen, ship, bullets):
-    shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
     """Fire a bullet, if limit not reached yet."""
     # Create a new bullet, add to bullets group.
     if len(bullets) < ai_settings.bullets_allowed:
-        pygame.mixer.Sound.play(shot_sound)
+        pygame.mixer.Sound.play(ai_settings.shot_sound)
         new_bullet = Bullet(ai_settings, screen, ship)
+
         bullets.add(new_bullet)
 
 def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
@@ -130,8 +130,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
         check_high_score(stats, sb)
-        alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
-        pygame.mixer.Sound.play(alien_die_sound)
+        pygame.mixer.Sound.play(ai_settings.alien_die_sound)
     
     if len(aliens) == 0:
         # If the entire fleet is destroyed, start a new level.
@@ -161,8 +160,7 @@ def change_fleet_direction(ai_settings, aliens):
     
 def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
-    die_sound = pygame.mixer.Sound('sounds/explosion.wav')
-    pygame.mixer.Sound.play(die_sound)
+    pygame.mixer.Sound.play(ai_settings.die_sound)
 
     stats.ships_left -= 1
     if stats.ships_left == 1:

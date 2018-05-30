@@ -1,4 +1,4 @@
-import random as r
+import pygame
 
 class Settings():
     """A class to store all settings for Alien Invasion."""
@@ -18,7 +18,11 @@ class Settings():
         self.bullet_height = 15
         self.bullet_color = (55, 105, 14)
         self.bullets_allowed = 3
-        
+
+        self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
+        self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
+        self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
+
         # Alien settings.
         self.fleet_drop_speed = 10
             
