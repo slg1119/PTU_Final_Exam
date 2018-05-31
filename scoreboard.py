@@ -59,7 +59,7 @@ class Scoreboard():
         # Position the level below the score.
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.screen_rect.right - 20
-        self.level_rect.top = 10
+        self.level_rect.top = self.score_rect.top
 
     def prep_lives(self):
         self.lives = self.font.render("LIVES : ", True,
