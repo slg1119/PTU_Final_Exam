@@ -12,6 +12,7 @@ class Settings():
         
         # Ship settings.
         self.ship_limit = 2
+        self.have_sound = True
             
         # Bullet settings.
         self.bullet_width = 3
@@ -19,9 +20,14 @@ class Settings():
         self.bullet_color = (55, 105, 14)
         self.bullets_allowed = 3
 
-        self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
-        self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
-        self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
+        try:
+            self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
+            self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
+            self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
+        except pygame.error as e:
+            print ("Can't load sound effects")
+            self.have_sound = False
+
 
         # Alien settings.
         self.fleet_drop_speed = 10
