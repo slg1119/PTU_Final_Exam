@@ -16,7 +16,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         fire_bullet(ai_settings, screen, ship, bullets)
     elif event.key == pygame.K_q:
         sys.exit()
-        
+
 def check_keyup_events(event, ship):
     """Respond to key releases."""
     if event.key == pygame.K_RIGHT:
@@ -59,7 +59,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship,
         sb.prep_high_score()
         sb.prep_level()
         sb.prep_ships()
-        
+
         # Empty the list of aliens and bullets.
         aliens.empty()
         bullets.empty()
@@ -83,6 +83,7 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
     """Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
     screen.fill(ai_settings.bg_color)
+    sb.draw_line()
     
     # Redraw all bullets, behind ship and aliens.
     for bullet in bullets.sprites():

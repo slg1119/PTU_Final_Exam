@@ -24,6 +24,8 @@ class Scoreboard():
         self.prep_high_score()
         self.prep_level()
         self.prep_ships()
+        self.prep_lives()
+        self.draw_line()
 
     def prep_score(self):
         """Turn the score into a rendered image."""
@@ -64,14 +66,26 @@ class Scoreboard():
         self.ships = Group()
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_settings, self.screen)
-            ship.rect.x = 10 + ship_number * ship.rect.width
-            ship.rect.y = 10
+            ship.rect.x = 120 + ship_number * ship.rect.width
+            ship.rect.y = 750
             self.ships.add(ship)
+
+    def prep_lives(self):
+        self.lives = self.font.render("Lives : ", True,
+            self.text_color, self.ai_settings.bg_color)
+        # Position the level below the score.
+        self.lives_rect = self.lives.get_rect()
+        self.lives_rect.x = 10
+        self.lives_rect.y = 765
         
     def show_score(self):
         """Draw score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
+        self.screen.blit(self.lives, self.lives_rect)
         # Draw ships.
         self.ships.draw(self.screen)
+
+    def draw_line(self):
+        pygame.draw.line(self.screen, (0, 255, 0), (0, 740), (1280, 740), 3)
