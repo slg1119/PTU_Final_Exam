@@ -31,19 +31,19 @@ class Scoreboard():
         """Turn the score into a rendered image."""
         rounded_score = int(round(self.stats.score, -1))
         score_str = "{:,}".format(rounded_score)
-        self.score_image = self.font.render(score_str, True, self.text_color,
+        self.score_image = self.font.render("SCORE : " + score_str, True, self.text_color,
             self.ai_settings.bg_color)
             
         # Display the score at the top right of the screen.
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.right = self.screen_rect.right - 20
+        self.score_rect.left = self.screen_rect.left + 20
         self.score_rect.top = 20
 
     def prep_high_score(self):
         """Turn the high score into a rendered image."""
         high_score = int(round(self.stats.high_score, -1))
         high_score_str = "{:,}".format(high_score)
-        self.high_score_image = self.font.render(high_score_str, True,
+        self.high_score_image = self.font.render( "HIGH SCORE : " + high_score_str, True,
             self.text_color, self.ai_settings.bg_color)
                 
         # Center the high score at the top of the screen.
@@ -53,14 +53,22 @@ class Scoreboard():
         
     def prep_level(self):
         """Turn the level into a rendered image."""
-        self.level_image = self.font.render(str(self.stats.level), True,
+        self.level_image = self.font.render( "LEVEL : " + str(self.stats.level), True,
                 self.text_color, self.ai_settings.bg_color)
         
         # Position the level below the score.
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.score_rect.right
-        self.level_rect.top = self.score_rect.bottom + 10
-        
+        self.level_rect.right = self.screen_rect.right - 20
+        self.level_rect.top = 10
+
+    def prep_lives(self):
+        self.lives = self.font.render("LIVES : ", True,
+                                          self.text_color, self.ai_settings.bg_color)
+        # Position the level below the score.
+        self.lives_rect = self.lives.get_rect()
+        self.lives_rect.x = 10
+        self.lives_rect.y = 760
+
     def prep_ships(self):
         """Show how many ships are left."""
         self.ships = Group()
@@ -70,14 +78,7 @@ class Scoreboard():
             ship.rect.y = 750
             self.ships.add(ship)
 
-    def prep_lives(self):
-        self.lives = self.font.render("Lives : ", True,
-            self.text_color, self.ai_settings.bg_color)
-        # Position the level below the score.
-        self.lives_rect = self.lives.get_rect()
-        self.lives_rect.x = 10
-        self.lives_rect.y = 760
-        
+
     def show_score(self):
         """Draw score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
