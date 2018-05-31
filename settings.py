@@ -17,7 +17,7 @@ class Settings():
         # Bullet settings.
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_color = (55, 105, 14)
+        self.bullet_color = (0, 255, 0)
         self.bullets_allowed = 3
 
         try:
@@ -28,7 +28,6 @@ class Settings():
             print ("Can't load sound effects")
             self.have_sound = False
 
-
         # Alien settings.
         self.fleet_drop_speed = 10
             
@@ -36,6 +35,8 @@ class Settings():
         self.speedup_scale = 1.1
         # How quickly the alien point values increase.
         self.score_scale = 1.5
+        # Pasue
+        self.game_pause = False
     
         self.initialize_dynamic_settings()
 
