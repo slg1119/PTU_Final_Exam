@@ -76,7 +76,7 @@ class Scoreboard():
         # Position the level below the score.
         self.lives_rect = self.lives.get_rect()
         self.lives_rect.x = 10
-        self.lives_rect.y = 765
+        self.lives_rect.y = 760
         
     def show_score(self):
         """Draw score to the screen."""
