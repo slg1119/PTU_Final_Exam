@@ -12,7 +12,7 @@ class Settings():
         
         # Ship settings.
         self.ship_limit = 2
-        self_have_sound = True
+        self.have_sound = True
             
         # Bullet settings.
         self.bullet_width = 3
@@ -21,7 +21,6 @@ class Settings():
         self.bullets_allowed = 3
 
         try:
-            print (self.have_sound)
             self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
             self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
             self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
