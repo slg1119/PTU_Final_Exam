@@ -21,6 +21,7 @@ class Settings():
         self.bullets_allowed = 3
 
         try:
+            self_have_sound = True
             self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
             self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
             self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
