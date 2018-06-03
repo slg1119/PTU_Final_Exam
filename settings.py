@@ -20,14 +20,6 @@ class Settings():
         self.bullet_color = (0, 255, 0)
         self.bullets_allowed = 3
 
-        try:
-            self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
-            self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
-            self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
-        except pygame.error as e:
-            print ("Can't load sound effects")
-            self.have_sound = False
-
         # Alien settings.
         self.fleet_drop_speed = 10
             
@@ -39,6 +31,7 @@ class Settings():
         self.game_pause = False
     
         self.initialize_dynamic_settings()
+        self.initialize_sound_settings()
 
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
@@ -51,6 +44,19 @@ class Settings():
     
         # fleet_direction of 1 represents right, -1 represents left.
         self.fleet_direction = 1
+
+    def initialize_sound_settings(self):
+        try:
+            self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
+            self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
+            self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
+            pygame.mixer.music.load("sounds/music.mp3")
+            pygame.mixer.music.set_volume(0.3)
+            pygame.mixer.music.play(loops=1)
+        except pygame.error as e:
+            print ("Can't load sound effects")
+            self.have_sound = False
+
         
     def increase_speed(self):
         """Increase speed settings and alien point values."""
