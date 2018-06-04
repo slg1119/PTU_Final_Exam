@@ -5,6 +5,7 @@ import pygame
 
 from bullet import Bullet
 from alien import Alien
+from button import Button
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Respond to keypresses."""
@@ -128,6 +129,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
     sb.prep_score()
     
     if collisions:
+        print (collisions.values())
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
