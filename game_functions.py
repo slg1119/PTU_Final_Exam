@@ -178,8 +178,6 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     
     # Create a new fleet, and center the ship.
     create_fleet(ai_settings, screen, ship, aliens, stats)
-    ship.center_ship()
-    stats.game_active = False
     pygame.mouse.set_visible(True)
     # Pause.
     sleep(0.5)
