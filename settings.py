@@ -39,7 +39,7 @@ class Settings():
         if (os.name == 'posix'):
             self.ship_speed_factor = 6.0
             self.bullet_speed_factor = 12
-            self.alien_speed_factor = 100
+            self.alien_speed_factor = 15
         else:
             self.ship_speed_factor = 1.5
             self.bullet_speed_factor = 3
