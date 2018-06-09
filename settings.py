@@ -1,4 +1,5 @@
 import pygame
+import os
 
 class Settings():
     """A class to store all settings for Alien Invasion."""
@@ -15,7 +16,7 @@ class Settings():
         self.have_sound = True
             
         # Bullet settings.
-        self.bullet_width = 3
+        self.bullet_width = 300
         self.bullet_height = 15
         self.bullet_color = (0, 255, 0)
         self.bullets_allowed = 3
@@ -35,9 +36,14 @@ class Settings():
 
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
-        self.ship_speed_factor = 1.5
-        self.bullet_speed_factor = 3
-        self.alien_speed_factor = 1
+        if (os.name == 'posix'):
+            self.ship_speed_factor = 6.0
+            self.bullet_speed_factor = 12
+            self.alien_speed_factor = 100
+        else:
+            self.ship_speed_factor = 1.5
+            self.bullet_speed_factor = 3
+            self.alien_speed_factor = 1
         
         # Scoring.
         self.alien_points = 50
@@ -50,6 +56,8 @@ class Settings():
             self.shot_sound = pygame.mixer.Sound('sounds/shoot.wav')
             self.alien_die_sound = pygame.mixer.Sound('sounds/invaderkilled.wav')
             self.die_sound = pygame.mixer.Sound('sounds/explosion.wav')
+
+            #Play Background Music
             pygame.mixer.music.load("sounds/music.mp3")
             pygame.mixer.music.set_volume(0.3)
             pygame.mixer.music.play(loops=1)

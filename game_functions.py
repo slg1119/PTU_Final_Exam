@@ -5,7 +5,6 @@ import pygame
 
 from bullet import Bullet
 from alien import Alien
-from button import Button
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Respond to keypresses."""
@@ -129,7 +128,6 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
     sb.prep_score()
     
     if collisions:
-        print (collisions.values())
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
@@ -147,7 +145,6 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
         sb.prep_level()
         
         create_fleet(ai_settings, screen, ship, aliens, stats)
-        sb.prep_level()
         sb.prep_high_score()
     
 def check_fleet_edges(ai_settings, aliens):
@@ -169,13 +166,11 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
         pygame.mixer.Sound.play(ai_settings.die_sound)
 
     stats.ships_left -= 1
-    if stats.ships_left == 1:
-        # Update scoreboard.
-        sb.prep_ships()
-        
-    else:
+    if stats.ships_left == 0:
         stats.game_active = False
         pygame.mouse.set_visible(True)
+    else:
+        sb.prep_ships()
     
     # Empty the list of aliens and bullets.
     aliens.empty()
@@ -184,7 +179,8 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     # Create a new fleet, and center the ship.
     create_fleet(ai_settings, screen, ship, aliens, stats)
     ship.center_ship()
-    
+    stats.game_active = False
+    pygame.mouse.set_visible(True)
     # Pause.
     sleep(0.5)
     
